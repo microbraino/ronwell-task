@@ -1,0 +1,26 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 120,
+  "editor.detectIndentation": false,
+  "eslint.format.enable": true,
+  // TypeScript specific settings
+  "typescript.format.insertSpaceAfterTypeAssertion": false,
+  "typescript.preferences.quoteStyle": "double",
+  "typescript.format.semicolons": "insert",
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+  // JavaScript specific settings
+  "javascript.preferences.quoteStyle": "double",
+  "javascript.format.semicolons": "insert",
+  "javascript.format.enable": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+}
+  
