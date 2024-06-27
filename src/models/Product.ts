@@ -1,37 +1,43 @@
-import {
-    Entity,
-    Column,
-    BaseEntity,
-    CreateDateColumn,
-    UpdateDateColumn,
-    DeleteDateColumn,
-    PrimaryGeneratedColumn,
+import
+{
+  Entity,
+  Column,
+  OneToMany,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm";
+import ProductVariant from "./ProductVariant";
 
 @Entity('product')
 export default class Product extends BaseEntity
 {
-    @PrimaryGeneratedColumn()
-    id: number;
-  
-    @Column()
-    name: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: "text", nullable: true })
-    description: string;
+  @Column()
+  name: string;
 
-    @Column({ type: "money" })
-    price: number;
+  @Column({ type: "text", nullable: true })
+  description: string;
 
-    @Column()
-    inventory: number;
+  @Column({ type: "decimal", default: 0.0 })
+  price: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @Column({ default: 0 })
+  inventory: number;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @OneToMany(() => ProductVariant, variant => variant.product)
+  variants: Array<ProductVariant>;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
