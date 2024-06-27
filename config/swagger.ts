@@ -21,6 +21,44 @@ const doc = {
         url: "http://localhost:8000",
       },
     ],
+    components: {
+      schemas: {
+        CreateProductModel: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              example: "Winter Jacket",
+            },
+            description: {
+              type: "string",
+              example: "A warm and stylish jacket for winter",
+            },
+            price: {
+              type: "number",
+              example: 34.53,
+            },
+            inventory: {
+              type: "number",
+              example: 45,
+            }
+          },
+          required: ["name", "description", "price", "inventory"],
+        },
+      },
+      securitySchemes: {
+        apiKey: {
+          type: "apiKey",
+          name: "apiKey",
+          in: "header",
+        },
+        bearerAuth: {
+          type: "apiKey",
+          name: "Authorization",
+          in: "header",
+        },
+      },
+    },
   },
   apis: ["**/*.ts"],
 };
