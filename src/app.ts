@@ -1,6 +1,7 @@
 require("dotenv").config();
 import { AppDataSource } from "../config";
 import bodyParser from "body-parser";
+import { Logger } from "./utils";
 import routers from './routers';
 import express from "express";
 
@@ -23,11 +24,11 @@ app.use('', routers);
 
 // establish database connection
 AppDataSource.initialize()
-  .then(() => { console.log("DB connection established on port:", process.env.DB_PORT); })
-  .catch((err: any) => { console.error("DB connection failed! error:", err); });
+  .then(() => { Logger.log("DB connection established on port:", process.env.DB_PORT); })
+  .catch((err: any) => { Logger.error("DB connection failed! error:", err); });
 
 // start listening
-app.listen(process.env.NODE_PORT, () => { console.log('Server listening ' + process.env.NODE_PORT); })
-  .on('error', (e: any) => console.error(e));
+app.listen(process.env.NODE_PORT, () => { Logger.log('Server listening ' + process.env.NODE_PORT); })
+  .on('error', (e: any) => Logger.error(e));
 
 export default app;
