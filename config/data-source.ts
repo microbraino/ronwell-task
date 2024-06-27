@@ -12,7 +12,7 @@ const AppDataSource = new DataSource({
   namingStrategy: new SnakeNamingStrategy(),
   synchronize: true,
   logging: false,
-  entities: ["./src/entities/*.ts"],
+  entities: ["./src/models/*.ts"],
   subscribers: ["./src/subscribers/**/*.ts"],
   migrations: ["./src/migrations/**/*.ts"]
 });

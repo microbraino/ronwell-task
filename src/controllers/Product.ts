@@ -1,11 +1,14 @@
+import { ProductService } from "../services";
 import { NextFunction, Request, Response } from "express";
-import { injectable } from "tsyringe";
-import { JsonResponse } from "../utils";
+import JsonResponse from "../utils/response/JsonResponse";
+import { injectable, inject } from "tsyringe";
 
 @injectable()
 export default class ProductController
 {
-  constructor ()
+  constructor (
+    @inject(ProductService) private readonly productService: ProductService,
+  )
   { }
 
   public async list(_request: Request, _response: Response, _next: NextFunction)
@@ -13,7 +16,9 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData("list");
+      jsonResponse.setData(await this.productService.list());
+
+      console.log(jsonResponse);
 
       return jsonResponse.response();
     } catch (error) {
@@ -26,7 +31,8 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData("create");
+      const body = _request.body;
+      jsonResponse.setData(await this.productService.create(body));
 
       return jsonResponse.response();
     } catch (error) {
@@ -39,7 +45,8 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData("getOne");
+      const id = parseInt(_request.params.id);
+      jsonResponse.setData(await this.productService.getOne(id));
 
       return jsonResponse.response();
     } catch (error) {
@@ -52,7 +59,9 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData("update");
+      const id = parseInt(_request.params.id);
+      const body = _request.body;
+      jsonResponse.setData(await this.productService.update(id, body));
 
       return jsonResponse.response();
     } catch (error) {
@@ -65,7 +74,8 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData("delete");
+      const id = parseInt(_request.params.id);
+      jsonResponse.setData(await this.productService.delete(id));
 
       return jsonResponse.response();
     } catch (error) {

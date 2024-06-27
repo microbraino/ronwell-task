@@ -17,10 +17,10 @@ export default class Product extends BaseEntity
     @Column()
     name: string;
 
-    @Column()
+    @Column({ type: "text", nullable: true })
     description: string;
 
-    @Column()
+    @Column({ type: "money" })
     price: number;
 
     @Column()
