@@ -33,7 +33,7 @@ router.get("/", (_request: Request, _response: Response, _next: NextFunction) =>
  *      content:
  *       application/json:
  *         schema:
- *           $ref: '#/components/schemas/CreateProductModel
+ *           $ref: '#/components/schemas/CreateProductModel'
  */
 router.post(
   "/",
@@ -72,7 +72,7 @@ router.get(
  *      content:
  *       application/json:
  *         schema:
- *           $ref: '#/components/schemas/CreateProductModel
+ *           $ref: '#/components/schemas/CreateProductModel'
  */
 router.put(
   "/:id",
