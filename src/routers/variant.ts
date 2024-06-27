@@ -1,34 +1,33 @@
 import { Request, Response, NextFunction } from "express";
-import { ProductController } from "../controllers";
-import variantRouter from "./variant";
+import { VariantController } from "../controllers";
 import { container } from "tsyringe";
 import { Router } from "express";
 
-const router = Router();
-const productController = container.resolve(ProductController);
+const router = Router({ mergeParams: true });
+const variantController = container.resolve(VariantController);
 
 /**
  * @openapi
- * "/products":
+ * "/products/{id}/variants":
  *  get:
- *    description: Lists all products
+ *    description: Lists all variants of a product
  *    responses:
  *          200:
- *            description: product array
+ *            description: variant array
  */
 router.get("/", (_request: Request, _response: Response, _next: NextFunction) =>
 {
-  productController.list(_request, _response, _next);
+  variantController.list(_request, _response, _next);
 });
 
 /**
  * @openapi
- * "/products":
+ * "/products/{id}/variants":
  *  post:
- *    description: Creates a new product
+ *    description: Creates a new variant of a product
  *    responses:
  *          200:
- *            description: product object
+ *            description: variant object
  *    requestBody:
  *      description: create product body
  *      required: true
@@ -41,68 +40,66 @@ router.post(
   "/",
   (_request: Request, _response: Response, _next: NextFunction) =>
   {
-    productController.create(_request, _response, _next);
+    variantController.create(_request, _response, _next);
   }
 );
 
 /**
  * @openapi
- * "/products/{id}":
+ * "/products/{id}/variants":
  *  get:
- *    description: Fetches a specific product
+ *    description: Fetches a specific variant
  *    responses:
  *          200:
- *            description: product object
+ *            description: variant object
  */
 router.get(
-  "/:id",
+  "/:variantId",
   (_request: Request, _response: Response, _next: NextFunction) =>
   {
-    productController.getOne(_request, _response, _next);
+    variantController.getOne(_request, _response, _next);
   }
 );
 
 /**
  * @openapi
- * "/products/{id}":
+ * "/products/{id}/variants/{id}":
  *  put:
- *    description: Updates a product
+ *    description: Updates a variant
  *    responses:
  *          200:
- *            description: product object
+ *            description: variant object
  *    requestBody:
- *      description: create product body
+ *      description: create variant body
  *      required: true
  *      content:
  *       application/json:
  *         schema:
- *           $ref: '#/components/schemas/CreateProductModel'
+ *           $ref: '#/components/schemas/CreateVariantModel'
  */
 router.put(
-  "/:id",
+  "/:variantId",
   (_request: Request, _response: Response, _next: NextFunction) =>
   {
-    productController.update(_request, _response, _next);
+    variantController.update(_request, _response, _next);
   }
 );
 
 /**
  * @openapi
- * "/products/{id}":
+ * "/products/{id}/variants/{id}":
  *  delete:
- *    description: Deletes a product
+ *    description: Deletes a variant
  *    responses:
  *          200:
- *            description: product object
+ *            description: variant object
  */
 router.delete(
-  "/:id",
+  "/:variantId",
   (_request: Request, _response: Response, _next: NextFunction) =>
   {
-    productController.delete(_request, _response, _next);
+    variantController.delete(_request, _response, _next);
   }
 );
-
-router.use("/:productId/variants", variantRouter);
 
 export default router;

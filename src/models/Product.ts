@@ -9,7 +9,7 @@ import
   DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import ProductVariant from "./ProductVariant";
+import ProductVariant from "./Variant";
 
 @Entity('product')
 export default class Product extends BaseEntity

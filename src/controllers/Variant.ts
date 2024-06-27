@@ -1,13 +1,13 @@
-import { ProductService } from "../services";
+import { VariantService } from "../services";
 import { NextFunction, Request, Response } from "express";
 import JsonResponse from "../utils/response/JsonResponse";
 import { injectable, inject } from "tsyringe";
 
 @injectable()
-export default class ProductController
+export default class VariantController
 {
   constructor (
-    @inject(ProductService) private readonly productService: ProductService,
+    @inject(VariantService) private readonly variantService: VariantService,
   )
   { }
 
@@ -16,7 +16,12 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      jsonResponse.setData(await this.productService.list());
+      const productId = parseInt(_request.params.productId, 10);
+      if (isNaN(productId)) {
+        throw "msg.error.invalid_product_id";
+      }
+
+      jsonResponse.setData(await this.variantService.list(productId));
 
       return jsonResponse.response();
     } catch (error) {
@@ -30,7 +35,12 @@ export default class ProductController
 
     try {
       const body = _request.body;
-      jsonResponse.setData(await this.productService.create(body));
+      const productId = parseInt(_request.params.productId, 10);
+      if (isNaN(productId)) {
+        throw "msg.error.invalid_product_id";
+      }
+
+      jsonResponse.setData(await this.variantService.create(productId, body));
 
       return jsonResponse.response();
     } catch (error) {
@@ -43,12 +53,12 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      const id = parseInt(_request.params.id, 10);
-      if (isNaN(id)) {
-        throw "msg.error.invalid_product_id";
+      const variantId = parseInt(_request.params.variantId, 10);
+      if (isNaN(variantId)) {
+        throw "msg.error.invalid_variant_id";
       }
 
-      jsonResponse.setData(await this.productService.getOne(id));
+      jsonResponse.setData(await this.variantService.getOne(variantId));
 
       return jsonResponse.response();
     } catch (error) {
@@ -62,12 +72,12 @@ export default class ProductController
 
     try {
       const body = _request.body;
-      const id = parseInt(_request.params.id, 10);
-      if (isNaN(id)) {
-        throw "msg.error.invalid_product_id";
+      const variantId = parseInt(_request.params.variantId, 10);
+      if (isNaN(variantId)) {
+        throw "msg.error.invalid_variant_id";
       }
 
-      jsonResponse.setData(await this.productService.update(id, body));
+      jsonResponse.setData(await this.variantService.update(variantId, body));
 
       return jsonResponse.response();
     } catch (error) {
@@ -80,12 +90,12 @@ export default class ProductController
     const jsonResponse = new JsonResponse(_request, _response);
 
     try {
-      const id = parseInt(_request.params.id, 10);
-      if (isNaN(id)) {
-        throw "msg.error.invalid_product_id";
+      const variantId = parseInt(_request.params.variantId, 10);
+      if (isNaN(variantId)) {
+        throw "msg.error.invalid_variant_id";
       }
-      
-      jsonResponse.setData(await this.productService.delete(id));
+
+      jsonResponse.setData(await this.variantService.delete(variantId));
 
       return jsonResponse.response();
     } catch (error) {

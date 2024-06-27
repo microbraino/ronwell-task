@@ -12,8 +12,8 @@ import
   } from "typeorm";
 import Product from "./Product";
 
-@Entity('product')
-export default class ProductVariant extends BaseEntity
+@Entity('variant')
+export default class Variant extends BaseEntity
 {
   @PrimaryGeneratedColumn()
   id: number;
