@@ -9,7 +9,7 @@ import
   DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import ProductVariant from "./Variant";
+import Variant from "./Variant";
 
 @Entity('product')
 export default class Product extends BaseEntity
@@ -29,8 +29,8 @@ export default class Product extends BaseEntity
   @Column({ default: 0 })
   inventory: number;
 
-  @OneToMany(() => ProductVariant, variant => variant.product)
-  variants: Array<ProductVariant>;
+  @OneToMany(() => Variant, variant => variant.product)
+  variants: Array<Variant>;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,5 +1,5 @@
-import SwaggerUi from 'swagger-ui-express';
 import SwaggerSpecs from '../../config/swagger';
+import SwaggerUi from 'swagger-ui-express';
 import { JsonResponse } from "../utils";
 import productRouter from './product';
 import { Router } from 'express';

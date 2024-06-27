@@ -1,8 +1,8 @@
 import AbstractService from "./Abstract";
 import { injectable } from "tsyringe";
+import { ProductDto } from "../dtos";
 import { Product } from "../models";
 import _ from "lodash";
-import { ProductDto } from "../dtos";
 
 @injectable()
 export default class ProductService extends AbstractService

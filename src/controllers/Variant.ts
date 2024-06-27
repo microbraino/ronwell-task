@@ -1,7 +1,7 @@
-import { VariantService } from "../services";
 import { NextFunction, Request, Response } from "express";
 import JsonResponse from "../utils/response/JsonResponse";
 import { injectable, inject } from "tsyringe";
+import { VariantService } from "../services";
 
 @injectable()
 export default class VariantController

@@ -1,9 +1,8 @@
+import { Product, Variant } from "../models";
 import AbstractService from "./Abstract";
 import { injectable } from "tsyringe";
-import { Product, Variant } from "../models";
-import _ from "lodash";
-import { ProductDto } from "../dtos";
 import { VariantDto } from "../dtos";
+import _ from "lodash";
 
 @injectable()
 export default class VariantService extends AbstractService
@@ -29,7 +28,6 @@ export default class VariantService extends AbstractService
     newVariant.name = body.name;
     newVariant.price = body.price;
     newVariant.product = product;
-
 
     return await newVariant.save();
   }
